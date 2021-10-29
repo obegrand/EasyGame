@@ -1,72 +1,66 @@
 #include <iostream>
 #include <ctime>	
 #include <string>
-//#include "header.h"
+
+#include "action.h"
+
 #define DEBUG
 #define all_clear system("CLS");
 
 using namespace std;
 
+
 struct hero
 {
+
 	string name;
-	int hp = 100;
+	int hp = 10000;
 	int damage;
 	double chance = 0.5;
 	bool armor = false;
 	bool power = false;
+
 }hero1, hero2;
 
-void delay(int kol_sec = -1)
-{
-	int start_temp_time = time(NULL);
-	while (true)
-	{
-		int now_temp_time = time(NULL);
-		int razn = start_temp_time - now_temp_time;
-		//cout << razn;
-		if (razn == kol_sec) break;
-	}
-}
-
-int randik_vsego(int max = 100, int min = 0)
-{
-	if (min > 0)
-	{
-		return rand() % max + min;
-	}
-	else
-	{
-		return rand() % max;
-	}
-}
 
 int  main()
 {
-	int (*random)(int max, int min);
-	//называй функцию рандома как хочь и используй её
-	random = randik_vsego;
 
 	setlocale(LC_ALL, "rus");
 	srand(time(NULL));
 
-	cout << "Добро пожаловать в -БИТВА НАЧИНАЕТСЯ-" << endl;
-	cout << "Как вас зовут?\n";
+	cout << "Добро пожаловать в -НАЗВАНИЕ ИГРЫ-" << endl;
+	cout << "Введите имя первого игрока\n";
 	cin >> hero1.name;
 	system("CLS");
-	cout << "А вас как?\n";
+	cout << "Введите имя второго игрока\n";
 	cin >> hero2.name;
 	system("CLS");
 
-	cout << "Че зарубишь " << hero1.name << " против меня ВЕЛИКОГО " << hero2.name << endl;
-	cout << "    [Enter]     " << endl;
+	
+	if ((hero2.name == "anatoliy") || (hero1.name == "anatoliy")) { cout << "Да начнётся битва между ВЕЛИКИМ ВСЕЯ РУССИ АНАТОЛИЕМ И тупочком (ты в муте)" << endl; } //|| "Anatoliy" || "Tolik" || "Toly" || "Tolynchik" || "tolik" ||"t0lyn" ||"anat0liy" ||"onatoliy" ||"TOLYNCHIK" ||"ANATOLIY" ||"TOLIK" ||"NIGGER" 
+	else cout << "Да начнётся битва между " << hero1.name << " и " << hero2.name << endl;
+
+
+
+
 	//начала кода
+
 	int raund = 0;
+
 	do {
 		raund++;
-		cout << "Раунд - " << raund << endl;
-		if (raund % 2 == 1)
+		cout << "Раунд - " << raund << " [ ";
+		if (main_hero(raund) == true)
 		{
+			cout << hero1.name;
+		}
+		if (main_hero(raund) == false)
+		{
+			cout << hero2.name;
+		}
+		cout << " ]" << endl;
+		
 			cout << "\nЧто вы собераетесь делать?\n[1]Атака\n[2]Защита (повышет шанс уклонения)\n[3]Сильная атака (занимает 2 хода)\n[4]Сдатся\n";
 			int chose_action;
 			cin >> chose_action;
@@ -75,207 +69,93 @@ int  main()
 			{
 				//	[1]Атака
 			case 1:
-				if (hero2.armor == true)
+				if (main_hero(raund) == true) 
 				{
-					hero1.chance = random(75, -25);
-					if (hero1.chance >= 10) {
-						hero1.damage = random(10, 10);
-						hero2.hp -= hero1.damage;
-						cout << "ОТЛАДКА - ДАМАГ ГЕРОЯ 1: " << hero1.damage << "                ХП 2 ГЕРОЯ  " << hero2.hp << endl;
-					}
-					else
-					{
-						cout << "ОТЛАДКА - Промох" << endl;
-					}
+					hero1.power = false;
+					hero2.hp = attack(hero2.hp, hero1.power, hero2.armor);
+					cout << "ХП "<< hero2.name <<" ГЕРОЯ: " << hero2.hp << endl; //"<< main_hero(raund)+1 <<"
 				}
-				else
+				if (main_hero(raund) == false) 
 				{
-					hero1.chance = random(100, 0);
-					if (hero1.chance >= 10) {
-						hero1.damage = random(10, 10);
-						hero2.hp -= hero1.damage;
-						cout << "ОТЛАДКА - ДАМАГ ГЕРОЯ 1: " << hero1.damage << "                ХП 2 ГЕРОЯ  " << hero2.hp << endl;
-						hero1.armor = false;
-					}
-					else
-					{
-						cout << "ОТЛАДКА - Промох" << endl;
-						hero1.armor = false;
-					}
+					hero2.power = false;
+					hero1.hp = attack(hero1.hp, hero2.power, hero1.armor);
+					cout << "ХП "<< hero1.name <<" ГЕРОЯ: " << hero1.hp << endl; // "<< main_hero(raund)+1 <<"
 				}
 				break;
 
 				//	[2]Защита (повышет шанс уклонения)
 			case 2:
-
-				hero1.armor = true;
+				if (main_hero(raund) == true) 
+				{
+					hero1.armor = true;
+				}
+				if (main_hero(raund) == false) 
+				{
+					hero2.armor = true;
+				}
 				break;
 
 				//	[3]Сильная атака (занимает 2 хода)
 			case 3:
-				if (hero1.power == false) { hero1.power = true; }
-				else
-				{
-					if (hero2.armor == true)
+				if (main_hero(raund) == true) // hero 1 and power 1
+				{ 
+					if (hero1.power == true) 
 					{
-						hero1.chance = random(75, -25);
-						if (hero1.chance >= 10)
-						{
-							hero1.damage = random(10, 10) * 2;
-							hero2.hp -= hero1.damage;
-							cout << "ОТЛАДКА -  УСИЛИНАЯ АТАКА | ГЕРОЯ 1 | ДАМАГ : " << hero1.damage << "                ХП 2 ГЕРОЯ  " << hero2.hp << endl;
-							hero1.power = false;
-							hero1.armor = false;
-						}
-						else
-						{
-							cout << "ОТЛАДКА - Промох" << endl;
-							hero1.power = false;
-							hero1.armor = false;
-						}
+						hero2.hp = attack(hero2.hp, hero1.power, hero2.armor);
+						cout << "ХП "<< hero2.name <<" ГЕРОЯ: " << hero2.hp << endl;
+						hero1.power = false;
 					}
-					else
-					{
-						hero1.chance = random(100, 0);
-						if (hero1.chance >= 10) {
-							hero1.damage = random(10, 10) * 2;
-							hero2.hp -= hero1.damage;
-							cout << "ОТЛАДКА -  УСИЛИНАЯ АТАКА | ГЕРОЯ 1 | ДАМАГ : " << hero1.damage << "                ХП 2 ГЕРОЯ  " << hero2.hp << endl;
-							hero1.power = false;
-							hero1.armor = false;
-						}
-						else
-						{
-							cout << "ОТЛАДКА - Промох" << endl;
-							hero1.power = false;
-							hero1.armor = false;
-						}
-					}
+					else { hero1.power = true; }
 				}
+				if (main_hero(raund) == false)
+				{
+					if (hero2.power == true) 
+					{
+						hero1.hp = attack(hero1.hp, hero2.power, hero1.armor);
+						cout << "ХП "<< hero1.name <<" ГЕРОЯ " << hero1.hp << endl;
+						hero2.power = false;
+					}
+				} else { hero2.power = true; }
 				break;
 
 				//	[4]Сдатся
 			case 4:
-				system("cls");
-				cout << hero2.name << " позорно сдался\n" << "Победил - " << hero1.name << endl;
-				system("pause");
+				if (main_hero(raund) == true) 
+				{
+					system("cls");
+					cout << hero1.name << " позорно сдался\n" << "Победил - " << hero2.name << endl;
+					hero1.hp = 0;
+					system("pause");
+				}
+				if (main_hero(raund) == false)
+				{
+					system("cls");
+					cout << hero2.name << " позорно сдался\n" << "Победил - " << hero1.name << endl;
+					hero2.hp = 0;
+					system("pause");
+				}
+				break;
+				//
+			case 5:
+				
 				break;
 
 			default:break;
-			}
-		}
-		else //*******************************************************************************************************************************
-		{
-			cout << "\nЧто вы собераетесь делать?\n[1]Атака\n[2]Защита (повышет шанс уклонения)\n[3]Сильная атака (занимает 2 хода)\n[4]Сдатся\n";
-			int chose_action;
-			cin >> chose_action;
-			cout << endl;
-			switch (chose_action)
-			{
-				//	[1]Атака
-			case 1:
-				if (hero1.armor == true)
-				{
-					hero1.chance = random(75, -25);
-					if (hero2.chance >= 10) {
-						hero2.damage = random(10, 10);
-						hero1.hp -= hero1.damage;
-						cout << "ОТЛАДКА - ДАМАГ ГЕРОЯ 2: " << hero2.damage << "                ХП 1 ГЕРОЯ  " << hero1.hp << endl;
-					}
-					else
-					{
-						cout << "ОТЛАДКА - Промох" << endl;
-					}
-				}
-				else
-				{
-					hero2.chance = random(100, 0);
-					if (hero2.chance >= 10) {
-						hero2.damage = random(10, 10);
-						hero1.hp -= hero2.damage;
-						cout << "ОТЛАДКА - ДАМАГ ГЕРОЯ 2: " << hero2.damage << "                ХП 1 ГЕРОЯ  " << hero1.hp << endl;
-						hero2.armor = false;
-					}
-					else
-					{
-						cout << "ОТЛАДКА - Промох" << endl;
-						hero2.armor = false;
-					}
-				}
-				break;
-
-				//	[2]Защита (повышет шанс уклонения)
-			case 2:
-
-				hero2.armor = true;
-				break;
-
-				//	[3]Сильная атака (занимает 2 хода)
-			case 3:
-				if (hero2.power == false) { hero2.power = true; }
-				else
-				{
-					if (hero1.armor == true)
-					{
-						hero2.chance = random(75, -25);
-						if (hero2.chance >= 10)
-						{
-							hero2.damage = random(10, 10) * 2;
-							hero1.hp -= hero2.damage;
-							cout << "ОТЛАДКА -  УСИЛИНАЯ АТАКА | ГЕРОЯ 2 | ДАМАГ : " << hero2.damage << "                ХП 1 ГЕРОЯ  " << hero1.hp << endl;
-							hero2.power = false;
-							hero2.armor = false;
-						}
-						else
-						{
-							cout << "ОТЛАДКА - Промох" << endl;
-							hero2.power = false;
-							hero2.armor = false;
-						}
-					}
-					else
-					{
-						hero2.chance = random(100, 0);
-						if (hero2.chance >= 10) {
-							hero2.damage = random(10, 10) * 2;
-							hero1.hp -= hero2.damage;
-							cout << "ОТЛАДКА -  УСИЛИНАЯ АТАКА | ГЕРОЯ 2 | ДАМАГ : " << hero2.damage << "                ХП 1 ГЕРОЯ  " << hero1.hp << endl;
-							hero2.power = false;
-							hero2.armor = false;
-						}
-						else
-						{
-							cout << "ОТЛАДКА - Промох" << endl;
-							hero2.power = false;
-							hero2.armor = false;
-						}
-					}
-				}
-				break;
-
-				//	[4]Сдатся
-			case 4:
-				system("cls");
-				cout << hero1.name << " позорно сдался\n" << "Победил - " << hero2.name << endl;
-				system("pause");
-				break;
-
-			default:break;
-			}
-		}
-		delay();
+		  }
+		cout << "-----------------------------" << endl;
+		delay(-1);
 		system("cls");
-		if (hero1.hp <= 0 || hero2.hp <= 0) { goto go; }            //************************
-	} while (true);
 
-go:																	//**************************
+		}while (endGame (hero1.hp, hero2.hp));
+		
+
 	if (hero1.hp > hero2.hp)
 	{
-		cout << " Победа за " << hero1.name;
+		cout << " Победа за " << hero1.name << endl;
 	}
 	else
 	{
-		cout << " Победа за " << hero2.name;
+		cout << " Победа за " << hero2.name << endl;
 	}
 	system("pause");
 	return true;
