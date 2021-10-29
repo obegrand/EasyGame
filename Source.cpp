@@ -107,8 +107,9 @@ int main()
 				}
 				else 
 				{
-#ifdef DEBUG
 					hero1.power = true;
+#ifdef DEBUG		
+					cout << "ÄÅÁÀÃ - ÑÈËÀ                 " << hero1.power << endl;
 #endif
 				}
 			}
@@ -122,8 +123,9 @@ int main()
 				}
 				else
 				{
-#ifdef DEBUG
 					hero2.power = true;
+#ifdef DEBUG		
+					cout << "ÄÅÁÀÃ - ÑÈËÀ                 " << hero2.power << endl;
 #endif
 				}
 			}
@@ -154,7 +156,7 @@ int main()
 			default:break;
 		}
 			cout << "-----------------------------" << endl;
-			delay(-3);
+			delay(-2);
 			system("cls");
 			if (raund > 100) { system("pause"); }
 		

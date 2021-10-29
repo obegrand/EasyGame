@@ -69,9 +69,6 @@ int attack(int hpEnemy,bool power,bool armorEnemy)
 }
 
 
-
-
-
 bool endGame(int Heal_1,int Heal_2)
 {
 	if (Heal_1 > 0 && Heal_2 > 0)
