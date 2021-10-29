@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void delay(int kol_sec = -1)
+void delay(double kol_sec = -1)
 {
 	int start_temp_time = time(NULL);
 	while (true)
@@ -49,25 +49,22 @@ int attack(int hpEnemy,bool power,bool armorEnemy)
 	
 	if (chance >= 20)
 	{
-		if (power == true) { damage = random(10, 10)*100; }
+		if (power == true) { damage = random(10, 10)*2,5; }
 		else { damage = random(10, 10); } //îò 10 äî (10+10) = 20
-
 		hpEnemy -= damage;
-		return hpEnemy;
 #ifdef DEBUG
 		cout << "ÄÅÁÀÃ - ÄÀÌÀÃÀ               " << damage << endl;
-		cout << "ÄÅÁÀÃ - ÇÀÙÈÒÀ               " << armorEnemy << endl;
 		cout << "ÄÅÁÀÃ - ÑÈËÀ                 " << power << endl;
 #endif	
+		return hpEnemy;
 	}
 	else
 	{
-		return hpEnemy;
 #ifdef	DEBUG
 		cout << "ÄÅÁÀÃ - ÄÀÌÀÃÀ               ÏĞÎÌÎÕ" << endl;
-		cout << "ÄÅÁÀÃ - ÇÀÙÈÒÀ               "<< armorEnemy <<endl;
 		cout << "ÄÅÁÀÃ - ÑÈËÀ                 "<< power << endl;
 #endif
+		return hpEnemy;
 	}
 }
 

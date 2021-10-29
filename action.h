@@ -1,5 +1,5 @@
 //задержка ( отрицательное число )
-void delay(int kol_sec = -1);
+void delay(double kol_sec = -1.0);
 //рандом ( от 0 до 100)
 int random(int max = 100, int min = 0);
 //проверка конца игры
