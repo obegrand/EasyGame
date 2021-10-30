@@ -22,7 +22,7 @@ int main()
 	setlocale(LC_ALL, "rus");
 	srand(time(NULL));
 
-	cout << "Äîáðî ïîæàëîâàòü â -ÍÀÇÂÀÍÈÅ ÈÃÐÛ-" << endl;
+	cout << "Äîáðî ïîæàëîâàòü â - ÁÈÒÂÀ ÄÂÓÕ ÑÂÅÐÕ ÐÀÇÓÌÎÂ -" << endl;
 	cout << "Ââåäèòå èìÿ ïåðâîãî èãðîêà\n";
 	cin >> hero1.name;
 	system("CLS");
