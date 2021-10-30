@@ -2,26 +2,20 @@
 #include <ctime>	
 #include <string>
 #include "action.h"
-
-#define DEBUG
+//#define DEBUG
 #define all_clear system("CLS");
 
 using namespace std;
 
-
 struct hero
 {
-
-	
 	string name;
 	int hp = 50;
 	int damage;
 	double chance = 0.5;
 	bool armor = false;
 	bool power = false;
-
 }hero1, hero2;
-
 
 int main()
 {
@@ -36,27 +30,19 @@ int main()
 	cin >> hero2.name;
 	system("CLS");
 
-
 	if ((hero2.name == "anatoliy") || (hero1.name == "anatoliy")) { cout << "Äà íà÷í¸òñÿ áèòâà ìåæäó ÂÅËÈÊÈÌ ÂÑÅß ÐÓÑÑÈ ÀÍÀÒÎËÈÅÌ È òóïî÷êîì (òû â ìóòå)" << endl; } //|| "Anatoliy" || "Tolik" || "Toly" || "Tolynchik" || "tolik" ||"t0lyn" ||"anat0liy" ||"onatoliy" ||"TOLYNCHIK" ||"ANATOLIY" ||"TOLIK" ||"NIGGER" 
 	else cout << "Äà íà÷í¸òñÿ áèòâà ìåæäó " << hero1.name << " è " << hero2.name << endl;
 
-
-
-
 	//íà÷àëà êîäà
-
 	int raund = 0;
-
 	do
 	{
 		raund++;
 		cout << "Ðàóíä - " << raund << " [ ";
-		if (main_hero(raund) == true)
-		{
+		if (main_hero(raund) == true){
 			cout << hero1.name;
 		}
-		if (main_hero(raund) == false)
-		{
+		if (main_hero(raund) == false){
 			cout << hero2.name;
 		}
 		cout << " ]" << endl;
@@ -71,15 +57,21 @@ int main()
 		case 1:
 			if (main_hero(raund) == true)
 			{
+				hero1.armor = false;
 				hero1.power = false;
-				hero2.hp = attack(hero2.hp, hero1.power, hero2.armor);
-				cout << "ÕÏ " << hero2.name << " ÃÅÐÎß: " << hero2.hp << endl; //"<< main_hero(raund)+1 <<"
+				hero2.hp = attack(hero2.hp, hero1.power, hero2.armor, main_hero(raund), hero1.hp, hero2.hp);
+#ifdef DEBUG		
+				cout << "ÄÅÁÀÃ - ÕÏ                " << hero2.hp << endl;
+#endif
 			}
 			if (main_hero(raund) == false)
 			{
+				hero2.armor = false;
 				hero2.power = false;
-				hero1.hp = attack(hero1.hp, hero2.power, hero1.armor);
-				cout << "ÕÏ " << hero1.name << " ÃÅÐÎß: " << hero1.hp << endl; // "<< main_hero(raund)+1 <<"
+				hero1.hp = attack(hero1.hp, hero2.power, hero1.armor, main_hero(raund), hero1.hp, hero2.hp);
+#ifdef DEBUG		
+				cout << "ÄÅÁÀÃ - ÕÏ                " << hero1.hp << endl;
+#endif
 			}
 			break;
 
@@ -88,10 +80,16 @@ int main()
 			if (main_hero(raund) == true)
 			{
 				hero1.armor = true;
+#ifdef DEBUG		
+				cout << "ÄÅÁÀÃ - ÁÐÎÍß                " << hero1.armor << endl;
+#endif
 			}
 			if (main_hero(raund) == false)
 			{
 				hero2.armor = true;
+#ifdef DEBUG		
+				cout << "ÄÅÁÀÃ - ÁÐÎÍß                 " << hero2.armor << endl;
+#endif
 			}
 			break;
 
@@ -99,10 +97,11 @@ int main()
 		case 3:
 			if (main_hero(raund) == true) // hero 1 and power 1
 			{
+				hero1.armor = false;
 				if (hero1.power == true)
 				{
-					hero2.hp = attack(hero2.hp, hero1.power, hero2.armor);
-					cout << "ÕÏ " << hero2.name << " ÃÅÐÎß: " << hero2.hp << endl;
+					hero2.hp = attack(hero2.hp, hero1.power, hero2.armor, main_hero(raund), hero1.hp, hero2.hp);
+					//cout << "ÕÏ " << hero2.name << " ÃÅÐÎß: " << hero2.hp << endl;
 					hero1.power = false;
 				}
 				else 
@@ -115,10 +114,11 @@ int main()
 			}
 			if (main_hero(raund) == false)
 			{
+				hero2.armor = false;
 				if (hero2.power == true)
 				{
-					hero1.hp = attack(hero1.hp, hero2.power, hero1.armor);
-					cout << "ÕÏ " << hero1.name << " ÃÅÐÎß " << hero1.hp << endl;
+					hero1.hp = attack(hero1.hp, hero2.power, hero1.armor, main_hero(raund), hero1.hp, hero2.hp);
+					//cout << "ÕÏ " << hero1.name << " ÃÅÐÎß " << hero1.hp << endl;
 					hero2.power = false;
 				}
 				else
@@ -148,21 +148,33 @@ int main()
 				system("pause");
 			}
 			break;
-			//
-		case 5:
+			
+		case 676:
 
+			if (main_hero(raund) == true)
+			{
+				cout << " âàì íå âèäàíî ïîâåçëî ÍÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀ \n --==Ê Ð È Ò  Ï À Ï È × À==-- - \n\n 1% íà ïðîê  \n Ó "<<hero2.name <<" [" << hero2.hp << "] " << " ÕÏ\n\n";
+				hero2.hp = -9999;
+			}
+			if (main_hero(raund) == false)
+			{
+				cout << " âàì íå âèäàíî ïîâåçëî ÍÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀ \n --==Ê Ð È Ò  Ï À Ï È × À==-- - \n\n 1% íà ïðîê  \n Ó " << hero1.name << " [" << hero1.hp << "] " << " ÕÏ\n\n";
+				hero1.hp = -9999;
+			}
+
+			
 			break;
 
 			default:break;
 		}
-			cout << "-----------------------------" << endl;
+			
 			delay(-2);
 			system("cls");
 			if (raund > 100) { system("pause"); }
 		
 	}while (endGame(hero1.hp, hero2.hp));
 
-
+		cout << "-------------============----------------" << endl;
 		if (hero1.hp > hero2.hp)
 		{
 			cout << " Ïîáåäà çà " << hero1.name << endl;
@@ -171,19 +183,9 @@ int main()
 		{
 			cout << " Ïîáåäà çà " << hero2.name << endl;
 		}
+		cout << "-------------============----------------" << endl;
 		system("pause");
 		return 0;
 }
 
 
-//	[name_1]             [name_2]
-//	  O        damage       O
-//	 /|\,/     --->>       /|\
-//	 / \                   / \
-//	[|||||]               [|||||] 
-
-//	[name_1]             [name_2]
-//	  O        damage      O
-//	 /|\       <<---    \,/|\
-//	 / \                  / \
-//	[|||||]               [|||||] 
