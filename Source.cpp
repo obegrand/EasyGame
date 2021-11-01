@@ -177,11 +177,11 @@ int main()
 		cout << "-------------============----------------" << endl;
 		if (hero1.hp > hero2.hp)
 		{
-			cout << " Победа за " << hero1.name << endl;
+			cout << "		Победа за " << hero1.name << endl;
 		}
 		else
 		{
-			cout << " Победа за " << hero2.name << endl;
+			cout << "		Победа за " << hero2.name << endl;
 		}
 		cout << "-------------============----------------" << endl;
 		system("pause");
