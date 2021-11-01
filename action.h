@@ -12,5 +12,5 @@ bool endGame(int Heal_1, int Heal_2);
 int attack(int hpEnemy, bool power, bool armorEnemy, int raund, int hero1hp, int hero2hp);
 //чей ход
 int main_hero(int raund);
-
+//визуализация атак
 void attackVisual(int hpEnemy, bool armorEnemy, int round, int hero1hp, int hero2hp);
