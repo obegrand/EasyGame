@@ -168,8 +168,8 @@ int main()
 			default:break;
 		}
 			
-			delay(-2);
-			system("cls");
+			//delay(-2);
+			//system("cls");
 			if (raund > 100) { system("pause"); }
 		
 	}while (endGame(hero1.hp, hero2.hp));

@@ -152,7 +152,7 @@ int attack(int hpEnemy, bool power, bool armorEnemy, int raund, int hp1, int hp2
 	if (armorEnemy == true) { chance = random(75, -25); } //-25 до (-25+75) = 50
 	else { chance = random(100, 0); }
 
-	if (chance == 100)
+	if (chance == 99)
 	{
 		if (power == true) { damage = 676; }
 		else { damage = 676; } //от 10 до (10+10) = 20
