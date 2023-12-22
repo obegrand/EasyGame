@@ -11,7 +11,7 @@ struct hero
 {
 	string name;
 	int hp = 50;
-	int damage;
+	int damage = 0;
 	double chance = 0.5;
 	bool armor = false;
 	bool power = false;
@@ -33,7 +33,7 @@ int main()
 	if ((hero2.name == "anatoliy") || (hero1.name == "anatoliy")) { cout << "Да начнётся битва между ВЕЛИКИМ ВСЕЯ РУССИ АНАТОЛИЕМ И тупочком (ты в муте)" << endl; } //|| "Anatoliy" || "Tolik" || "Toly" || "Tolynchik" || "tolik" ||"t0lyn" ||"anat0liy" ||"onatoliy" ||"TOLYNCHIK" ||"ANATOLIY" ||"TOLIK" ||"NIGGER" 
 	else cout << "Да начнётся битва между " << hero1.name << " и " << hero2.name << endl;
 
-	//начала кода
+	//начало игры
 	int raund = 0;
 	do
 	{
@@ -168,8 +168,8 @@ int main()
 			default:break;
 		}
 			
-			//delay(-2);
-			//system("cls");
+			delay(-2);
+			system("cls");
 			if (raund > 100) { system("pause"); }
 		
 	}while (endGame(hero1.hp, hero2.hp));
@@ -187,5 +187,3 @@ int main()
 		system("pause");
 		return 0;
 }
-
-

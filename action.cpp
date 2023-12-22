@@ -38,8 +38,6 @@ int main_hero(int raund)
 	else return 0;
 }
 
-
-
 bool endGame(int Heal_1,int Heal_2)
 {
 	if (Heal_1 > 0 && Heal_2 > 0)
@@ -140,7 +138,6 @@ void attackVisualMiss(int damage, bool armorEnemy, bool raund, int hp1, int hp2)
 		}
 	}
 }
-
 
 int attack(int hpEnemy, bool power, bool armorEnemy, int raund, int hp1, int hp2)
 {
