@@ -31,13 +31,11 @@ int random(int max = 100, int min = 0)
 
 int main_hero(int raund)
 {
-	
 	if (raund % 2 == 1) //1,3,5,7...
 	{
 		return 1;
 	}
 	else return 0;
-
 }
 
 
