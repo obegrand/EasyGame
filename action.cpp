@@ -38,7 +38,7 @@ int main_hero(int raund)
 	else return 0;
 }
 
-bool endGame(int Heal_1,int Heal_2)
+bool endGame(int Heal_1, int Heal_2)
 {
 	if (Heal_1 > 0 && Heal_2 > 0)
 	{
@@ -47,7 +47,7 @@ bool endGame(int Heal_1,int Heal_2)
 	else return false;
 }
 
-void attackVisual(int damage, bool armorEnemy,bool raund, int hp1, int hp2)
+void attackVisual(int damage, bool armorEnemy, bool raund, int hp1, int hp2)
 {
 	if (raund == 1)
 	{
@@ -57,7 +57,7 @@ void attackVisual(int damage, bool armorEnemy,bool raund, int hp1, int hp2)
 			cout << "  O    " << damage << "   O  " << endl;
 			cout << " /|\\,/ " << "->" << " @/|\\ " << endl;
 			cout << " / \\   " << "  " << "  / \\ " << endl;
-			cout << "[" << hp1 << "]" << "       " << "[" << hp2-damage << "]" << endl;
+			cout << "[" << hp1 << "]" << "       " << "[" << hp2 - damage << "]" << endl;
 			cout << endl;
 		}
 		else
@@ -66,7 +66,7 @@ void attackVisual(int damage, bool armorEnemy,bool raund, int hp1, int hp2)
 			cout << "  O    " << damage << "   O  " << endl;
 			cout << " /|\\,/ " << "->" << "  /|\\ " << endl;
 			cout << " / \\   " << "  " << "  / \\ " << endl;
-			cout << "[" << hp1 << "]" << "       " << "[" << hp2-damage << "]" << endl;
+			cout << "[" << hp1 << "]" << "       " << "[" << hp2 - damage << "]" << endl;
 			cout << endl;
 		}
 	}
@@ -78,7 +78,7 @@ void attackVisual(int damage, bool armorEnemy,bool raund, int hp1, int hp2)
 			cout << "  O    " << damage << "     O  " << endl;
 			cout << " /|\\   " << "<-" << "  \\,/|\\ " << endl;
 			cout << " / \\   " << "  " << "    / \\ " << endl;
-			cout << "[" << hp1-damage << "]" << "        " << "[" << hp2 << "]" << endl;
+			cout << "[" << hp1 - damage << "]" << "        " << "[" << hp2 << "]" << endl;
 			cout << endl;
 		}
 		else
@@ -87,7 +87,7 @@ void attackVisual(int damage, bool armorEnemy,bool raund, int hp1, int hp2)
 			cout << "  O    " << damage << "    O  " << endl;
 			cout << " /|\\@  " << "<-" << " \\,/|\\ " << endl;
 			cout << " / \\   " << "  " << "   / \\ " << endl;
-			cout << "["<< hp1 - damage <<"]" << "       " << "[" << hp2 << "]" << endl;
+			cout << "[" << hp1 - damage << "]" << "       " << "[" << hp2 << "]" << endl;
 			cout << endl;
 		}
 	}
@@ -112,7 +112,7 @@ void attackVisualMiss(int damage, bool armorEnemy, bool raund, int hp1, int hp2)
 			cout << "  O   " << "Miss" << "  O  " << endl;
 			cout << " /|\\,/ " << "->" << "  /|\\ " << endl;
 			cout << " / \\   " << "  " << "  / \\ " << endl;
-			cout << "[" << hp1 << "]" << "       " << "[" << hp2  << "]" << endl;
+			cout << "[" << hp1 << "]" << "       " << "[" << hp2 << "]" << endl;
 			cout << endl;
 		}
 	}
@@ -124,7 +124,7 @@ void attackVisualMiss(int damage, bool armorEnemy, bool raund, int hp1, int hp2)
 			cout << "  O   " << "Miss" << "    O  " << endl;
 			cout << " /|\\   " << "<-" << "  \\,/|\\ " << endl;
 			cout << " / \\   " << "  " << "    / \\ " << endl;
-			cout << "[" << hp1  << "]" << "        " << "[" << hp2 << "]" << endl;
+			cout << "[" << hp1 << "]" << "        " << "[" << hp2 << "]" << endl;
 			cout << endl;
 		}
 		else
@@ -133,7 +133,7 @@ void attackVisualMiss(int damage, bool armorEnemy, bool raund, int hp1, int hp2)
 			cout << "  O   " << "Miss" << "   O  " << endl;
 			cout << " /|\\@  " << "<-" << " \\,/|\\ " << endl;
 			cout << " / \\   " << "  " << "   / \\ " << endl;
-			cout << "[" << hp1  << "]" << "       " << "[" << hp2 << "]" << endl;
+			cout << "[" << hp1 << "]" << "       " << "[" << hp2 << "]" << endl;
 			cout << endl;
 		}
 	}
@@ -157,26 +157,26 @@ int attack(int hpEnemy, bool power, bool armorEnemy, int raund, int hp1, int hp2
 	}
 
 
-		if (chance >= 20)
-		{
-			if (power == true) { damage = random(10, 10) * 2,5; }
-			else { damage = random(10, 10); } //ÓÚ 10 ‰Ó (10+10) = 20
+	if (chance >= 20)
+	{
+		if (power == true) { damage = random(10, 10) * 2, 5; }
+		else { damage = random(10, 10); } //ÓÚ 10 ‰Ó (10+10) = 20
 #ifdef DEBUG
-			cout << "ƒ≈¡¿√ - ƒ¿Ã¿√¿               " << damage << endl;
-			cout << "ƒ≈¡¿√ - —»À¿                 " << power << endl;
+		cout << "ƒ≈¡¿√ - ƒ¿Ã¿√¿               " << damage << endl;
+		cout << "ƒ≈¡¿√ - —»À¿                 " << power << endl;
 #endif	
-			attackVisual(damage, armorEnemy1, raund2,hp1,hp2);
-			hpEnemy -= damage;
-			return hpEnemy;
-		}
-		else
-		{
+		attackVisual(damage, armorEnemy1, raund2, hp1, hp2);
+		hpEnemy -= damage;
+		return hpEnemy;
+	}
+	else
+	{
 #ifdef	DEBUG
-			cout << "ƒ≈¡¿√ - ƒ¿Ã¿√¿               œ–ŒÃŒ’" << endl;
-			cout << "ƒ≈¡¿√ - —»À¿                 " << power << endl;
+		cout << "ƒ≈¡¿√ - ƒ¿Ã¿√¿               œ–ŒÃŒ’" << endl;
+		cout << "ƒ≈¡¿√ - —»À¿                 " << power << endl;
 #endif
-			attackVisualMiss(damage, armorEnemy1, raund2, hp1, hp2);
-			return hpEnemy;
-		}
-	
+		attackVisualMiss(damage, armorEnemy1, raund2, hp1, hp2);
+		return hpEnemy;
+	}
+
 }

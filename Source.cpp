@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ctime>	
+#include <fstream>	
 #include <string>
 #include "action.h"
 //#define DEBUG
@@ -19,17 +20,20 @@ struct hero
 
 int main()
 {
+	fstream in_file("battle_log.txt", ios::in | ios::app);
 	setlocale(LC_ALL, "rus");
 	srand(time(NULL));
-
+	system("CLS");
 	cout << "Äîáðî ïîæàëîâàòü â - ÁÈÒÂÀ ÄÂÓÕ ÑÂÅÐÕ ÐÀÇÓÌÎÂ -" << endl;
+	in_file << "-----------------------------------------------------" << endl;
+	in_file << "Äîáðî ïîæàëîâàòü â - ÁÈÒÂÀ ÄÂÓÕ ÑÂÅÐÕ ÐÀÇÓÌÎÂ -" << endl;
 	cout << "Ââåäèòå èìÿ ïåðâîãî èãðîêà\n";
 	cin >> hero1.name;
 	system("CLS");
 	cout << "Ââåäèòå èìÿ âòîðîãî èãðîêà\n";
 	cin >> hero2.name;
 	system("CLS");
-
+	in_file << "Áèòâà ìåæäó " << hero1.name << " è " << hero2.name << endl;
 	if ((hero2.name == "anatoliy") || (hero1.name == "anatoliy")) { cout << "Äà íà÷í¸òñÿ áèòâà ìåæäó ÂÅËÈÊÈÌ ÂÑÅß ÐÓÑÑÈ ÀÍÀÒÎËÈÅÌ È òóïî÷êîì (òû â ìóòå)" << endl; } //|| "Anatoliy" || "Tolik" || "Toly" || "Tolynchik" || "tolik" ||"t0lyn" ||"anat0liy" ||"onatoliy" ||"TOLYNCHIK" ||"ANATOLIY" ||"TOLIK" ||"NIGGER" 
 	else cout << "Äà íà÷í¸òñÿ áèòâà ìåæäó " << hero1.name << " è " << hero2.name << endl;
 
@@ -39,17 +43,22 @@ int main()
 	{
 		raund++;
 		cout << "Ðàóíä - " << raund << " [ ";
-		if (main_hero(raund) == true){
+		in_file << "Ðàóíä - " << raund << " [ ";
+		if (main_hero(raund) == true) {
 			cout << hero1.name;
+			in_file << hero1.name;
 		}
-		if (main_hero(raund) == false){
+		if (main_hero(raund) == false) {
 			cout << hero2.name;
+			in_file << hero2.name;
 		}
 		cout << " ]" << endl;
+		in_file << " ]" << endl;
 
 		cout << "\n×òî âû ñîáèðàåòåñü äåëàòü?\n[1]Àòàêà\n[2]Çàùèòà (ïîâûøàåò øàíñ óêëîíåíèÿ)\n[3]Ñèëüíàÿ àòàêà (çàíèìàåò 2 õîäà)\n[4]Ñäàòñÿ\n";
 		int chose_action;
 		cin >> chose_action;
+		in_file << chose_action << endl;
 		cout << endl;
 		switch (chose_action)
 		{
@@ -104,7 +113,7 @@ int main()
 					//cout << "ÕÏ " << hero2.name << " ÃÅÐÎß: " << hero2.hp << endl;
 					hero1.power = false;
 				}
-				else 
+				else
 				{
 					hero1.power = true;
 #ifdef DEBUG		
@@ -129,14 +138,15 @@ int main()
 #endif
 				}
 			}
-				break;
+			break;
 
-				//	[4]Ñäàòñÿ
+			//	[4]Ñäàòñÿ
 		case 4:
 			if (main_hero(raund) == true)
 			{
 				system("cls");
 				cout << hero1.name << " ïîçîðíî ñäàëñÿ\n" << "Ïîáåäèë - " << hero2.name << endl;
+				in_file << hero1.name << " ïîçîðíî ñäàëñÿ\n" << "Ïîáåäèë - " << hero2.name << endl;
 				hero1.hp = 0;
 				system("pause");
 			}
@@ -144,46 +154,60 @@ int main()
 			{
 				system("cls");
 				cout << hero2.name << " ïîçîðíî ñäàëñÿ\n" << "Ïîáåäèë - " << hero1.name << endl;
+				in_file << hero2.name << " ïîçîðíî ñäàëñÿ\n" << "Ïîáåäèë - " << hero1.name << endl;
 				hero2.hp = 0;
 				system("pause");
 			}
 			break;
-			
+
 		case 676:
 
 			if (main_hero(raund) == true)
 			{
-				cout << " âàì íå âèäàíî ïîâåçëî ÍÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀ \n --==Ê Ð È Ò  Ï À Ï È × À==-- - \n\n 1% íà ïðîê  \n Ó "<<hero2.name <<" [" << hero2.hp << "] " << " ÕÏ\n\n";
+				cout << " âàì íå âèäàíî ïîâåçëî ÍÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀ \n --==Ê Ð È Ò  Ï À Ï È × À==-- - \n\n 1% íà ïðîê  \n Ó " << hero2.name << " [" << hero2.hp << "] " << " ÕÏ\n\n";
+				in_file << " âàì íå âèäàíî ïîâåçëî ÍÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀ \n --==Ê Ð È Ò  Ï À Ï È × À==-- - \n\n 1% íà ïðîê  \n Ó " << hero2.name << " [" << hero2.hp << "] " << " ÕÏ\n\n";
 				hero2.hp = -9999;
 			}
 			if (main_hero(raund) == false)
 			{
 				cout << " âàì íå âèäàíî ïîâåçëî ÍÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀ \n --==Ê Ð È Ò  Ï À Ï È × À==-- - \n\n 1% íà ïðîê  \n Ó " << hero1.name << " [" << hero1.hp << "] " << " ÕÏ\n\n";
+				in_file << " âàì íå âèäàíî ïîâåçëî ÍÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀ \n --==Ê Ð È Ò  Ï À Ï È × À==-- - \n\n 1% íà ïðîê  \n Ó " << hero1.name << " [" << hero1.hp << "] " << " ÕÏ\n\n";
 				hero1.hp = -9999;
 			}
 
-			
+
 			break;
 
-			default:break;
+		default:break;
 		}
-			
-			delay(-2);
-			system("cls");
-			if (raund > 100) { system("pause"); }
-		
-	}while (endGame(hero1.hp, hero2.hp));
 
-		cout << "-------------============----------------" << endl;
-		if (hero1.hp > hero2.hp)
-		{
-			cout << "		Ïîáåäà çà " << hero1.name << endl;
-		}
-		else
-		{
-			cout << "		Ïîáåäà çà " << hero2.name << endl;
-		}
-		cout << "-------------============----------------" << endl;
-		system("pause");
-		return 0;
+		delay(-2);
+		system("cls");
+		if (raund > 100) { system("pause"); }
+
+	} while (endGame(hero1.hp, hero2.hp));
+
+	int length1 = hero1.name.size();
+	int length2 = hero2.name.size();
+
+	if (hero1.hp > hero2.hp)
+	{
+		cout << string(5, '-') << string(length1+2, '=') << string(5, '-') << endl;
+		cout << " Ïîáåäà çà " << hero1.name << endl;
+		cout << string(5, '-') << string(length1 + 2, '=') << string(5, '-') << endl;
+		in_file << string(5, '-') << string(length1 + 2, '=') << string(5, '-') << endl;
+		in_file << " Ïîáåäà çà " << hero1.name << endl;
+		in_file << string(5, '-') << string(length1 + 2, '=') << string(5, '-') << endl;
+	}
+	else
+	{
+		cout << string(5, '-') << string(length2 + 2, '=') << string(5, '-') << endl;
+		cout << " Ïîáåäà çà " << hero2.name << endl;
+		cout << string(5, '-') << string(length2 + 2, '=') << string(5, '-') << endl;
+		in_file << string(5, '-') << string(length2 + 2, '=') << string(5, '-') << endl;
+		in_file << " Ïîáåäà çà " << hero2.name << endl;
+		in_file << string(5, '-') << string(length2 + 2, '=') << string(5, '-') << endl;
+	}
+	system("pause");
+	return 0;
 }
